@@ -1,0 +1,31 @@
+{
+  "name": "paslchoix-server",
+  "version": "0.1.1",
+  "description": "An engaging and interactive random draw app",
+  "license": "MIT",
+  "author": "Pol Thomas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "back-dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@types/node": "^20.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "from": "^0.1.7",
+    "import": "^0.0.6",
+    "mongoose": "^8.0.1",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": ">=2.7"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
