@@ -6,8 +6,9 @@
   "author": "Pol Thomas",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
-    "back-dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
+    "start": "node dist/server.js",
+    "postinstall": "tsc",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
     "build": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
