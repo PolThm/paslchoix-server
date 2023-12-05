@@ -25,9 +25,7 @@ mongoose.connect(MONGODB_URI)
     console.error('Failed to connect to MongoDB', err);
   });
 
-app.use(cors({
-  origin: 'https://paslchoix.netlify.app'
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use('/api', listRoutes);
