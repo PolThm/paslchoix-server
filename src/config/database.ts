@@ -1,23 +1,19 @@
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  throw new Error('The MONGODB_URI must be defined in the .env file');
-}
-
-const client = new MongoClient(uri, {
-  serverApi: ServerApiVersion.v1,
-});
-
 export async function connectToDatabase() {
+  const MONGODB_URI = process.env.MONGODB_URI;
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI must be defined');
+  }
+
   try {
-    await client.connect();
-    console.log("Successfully connected to MongoDB!");
-  } catch (error) {
-    console.error("Failed to connect to MongoDB", error);
+    await mongoose.connect(MONGODB_URI);
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Failed to connect to MongoDB', err);
     process.exit(1);
   }
 }
