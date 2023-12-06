@@ -1,5 +1,6 @@
 import List from '../models/ListModel';
 import { Request, Response } from 'express';
+import mongoose from 'mongoose'
 
 export const getAllLists = async (req: Request, res: Response) => {
   try {
@@ -48,3 +49,27 @@ export const createList = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const deleteList = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  console.log('Deleting list with ID:', id);
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+
+  try {
+    const list = await List.findById(id);
+    if (list) {
+      await List.findByIdAndDelete(id);
+      res.json({ message: 'List successfully deleted' });
+    } else {
+      res.status(404).json({ message: 'List not found' });
+    }
+  } catch (error) {
+    console.log('Error in deleteList:', error);
+    res.status(500).json({ message: 'An error occurred' });
+  }
+};
+

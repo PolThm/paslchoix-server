@@ -2,13 +2,13 @@ import mongoose from 'mongoose';
 import { Volunteer, List } from '../types/types';
 
 const volunteerSchema = new mongoose.Schema<Volunteer>({
-  id: Number,
+  id: String,
   name: String,
   target: String,
 });
 
 const listSchema = new mongoose.Schema<List>({
-  id: Number,
+  id: String,
   name: String,
   volunteers: [volunteerSchema],
 });

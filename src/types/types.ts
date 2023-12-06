@@ -1,11 +1,11 @@
 export interface Volunteer {
-  id: number;
+  id: string;
   name: string;
   target?: string;
 }
 
 export interface List {
-  id: number;
+  id: string;
   name: string;
   volunteers: Volunteer[];
 }
