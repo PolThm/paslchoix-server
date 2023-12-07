@@ -73,3 +73,26 @@ export const deleteList = async (req: Request, res: Response) => {
   }
 };
 
+export const updateList = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+
+  try {
+    const list = await List.findById(id);
+    if (list) {
+      const updatedList = await List.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      res.json(updatedList);
+    } else {
+      res.status(404).json({ message: 'List not found' });
+    }
+  } catch (error) {
+    console.log('Error in updateList:', error);
+    res.status(500).json({ message: 'An error occurred' });
+  }
+}
+
