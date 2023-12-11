@@ -5,11 +5,10 @@ const volunteerSchema = new mongoose.Schema<Volunteer>({
   id: String,
   name: String,
   target: String,
-  isTargeted: Boolean,
+  hasDrawn: Boolean,
 });
 
 const listSchema = new mongoose.Schema<List>({
-  id: String,
   name: String,
   volunteers: [volunteerSchema],
 });

@@ -1,12 +1,13 @@
 export interface Volunteer {
+  _id?: string;
   id: string;
   name: string;
-  target?: string;
-  isTargeted: boolean;
+  target: string;
+  hasDrawn: boolean;
 }
 
 export interface List {
-  id: string;
+  _id?: string;
   name: string;
   volunteers: Volunteer[];
 }
