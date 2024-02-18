@@ -5,7 +5,7 @@ import {
   createList,
   deleteList,
   updateList
-} from '../controllers/listController';
+} from '../controllers/ListController';
 
 const router = express.Router();
 

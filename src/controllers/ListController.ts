@@ -1,4 +1,4 @@
-import List from '../models/ListModel';
+import List from '../models/listModel';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose'
 

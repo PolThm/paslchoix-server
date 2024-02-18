@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import List from '../models/ListModel';
+import List from '../models/listModel';
 
 dotenv.config();
 
