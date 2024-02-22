@@ -4,7 +4,10 @@ import mongoose from 'mongoose'
 
 export const getAllLists = async (req: Request, res: Response) => {
   try {
-    const lists = await List.find();
+    const owner = req.query.owner;
+    let query = {};
+    if (owner) query = { owner: owner.toString() };
+    const lists = await List.find(query);
     res.json(lists);
   } catch (error) {
     if (error instanceof Error) {
@@ -14,6 +17,7 @@ export const getAllLists = async (req: Request, res: Response) => {
     }
   }
 };
+
 
 export const getListById = async (req: Request, res: Response) => {
   try {
@@ -37,6 +41,7 @@ export const createList = async (req: Request, res: Response) => {
     const list = new List({
       id: req.body.id,
       name: req.body.name,
+      owner: req.body.owner,
       volunteers: req.body.volunteers,
     });
     const newList = await list.save();

@@ -10,6 +10,7 @@ const volunteerSchema = new mongoose.Schema<Volunteer>({
 
 const listSchema = new mongoose.Schema<List>({
   name: String,
+  owner: String,
   volunteers: [volunteerSchema],
 });
 

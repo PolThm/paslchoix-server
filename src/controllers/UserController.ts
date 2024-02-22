@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { RequestWithUser } from "../types/types";
-import User from "../models/user";
+import User from "../models/userModel";
 import bcrypt from "bcrypt";
 
 export const register = async (req: RequestWithUser, res: Response) => {
@@ -9,8 +9,11 @@ export const register = async (req: RequestWithUser, res: Response) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) return res.json({ message: 'Please enter all fields' });
 
-    const existingUser = await User.findOne({$or: [{ username }, { email }]});
-    if (existingUser) return res.json({ message: 'User already exists' });
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) return res.json({ errorWith: 'username', message: 'Username already exists' });
+
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) return res.json({ errorWith: 'email', message: 'Email already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, email, password: hashedPassword });
@@ -31,10 +34,10 @@ export const login = async (req: RequestWithUser, res: Response) => {
     if (!username || !password) return res.json({ message: 'Please enter all fields' });
 
     const user = await User.findOne({ username });
-    if (!user) return res.json({ message: 'User does not exist' });
+    if (!user) return res.json({ errorWith: 'username', message: 'User does not exist' });
 
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) return res.json({ message: 'Invalid credentials' });
+    if (!passwordMatch) return res.json({ errorWith: 'password', message: 'Invalid password' });
 
     const payload = { id: user._id, username: user.username };
     jwt.sign(
@@ -73,7 +76,7 @@ export const verifyJWT = (req: RequestWithUser, res: Response, next: NextFunctio
   });
 };
 
-export const getUsername = (req: RequestWithUser, res: Response) => {
+export const isUserAuth = (req: RequestWithUser, res: Response) => {
   verifyJWT(req, res, () => {});
   res.json({ isLoggedIn: true, username: req.user?.username });
 }

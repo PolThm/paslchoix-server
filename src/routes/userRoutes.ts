@@ -1,11 +1,11 @@
 import express from 'express';
 
-import { getUsername, login, register, verifyJWT } from "../controllers/UserController";
+import {isUserAuth, login, register} from "../controllers/UserController";
 
 const router = express.Router();
 
 router.post('/register', register)
 router.post ('/login', login)
-router.get('/get-username', getUsername )
+router.get('/is-user-auth', isUserAuth )
 
 export default router;

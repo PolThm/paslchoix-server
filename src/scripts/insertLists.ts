@@ -15,6 +15,7 @@ const myLists = [
   {
     _id: "65704fef8d9c8236611c3e41",
     name: 'Famille André',
+    owner: "Pol1",
     volunteers: [
       { id: "1", name: 'Juliette', target: '4', hasDrawn: false },
       { id: "2", name: 'Eric', target: '1', hasDrawn: false },
@@ -25,6 +26,7 @@ const myLists = [
   {
     _id: "65704fef8d9c8236611c3e42",
     name: 'Colocs',
+    owner: "Pol2",
     volunteers: [
       { id: "1", name: 'Angela', target: '2', hasDrawn: false },
       { id: "2", name: 'Pol', target: '1', hasDrawn: false },
@@ -35,6 +37,7 @@ const myLists = [
   {
     _id: "65704fef8d9c8236611c3e43",
     name: 'Liste des cons',
+    owner: "Pol1",
     volunteers: [
       { id: "1", name: 'Donald Trump', target: '4', hasDrawn: false },
       { id: "2", name: 'Vladimir Putin', target: '1', hasDrawn: false },
