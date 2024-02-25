@@ -45,7 +45,7 @@ export const login = async (req: RequestWithUser, res: Response) => {
       process.env.JWT_SECRET as string,
       { expiresIn: 86400 },
       (err, token) => {
-        if (err) return res.json({message: err})
+        if (err) return res.json({ message: err })
         return res.json({ message: 'Login successful', token: `Bearer ${token}`});
       });
   } catch (error) {
@@ -76,7 +76,8 @@ export const verifyJWT = (req: RequestWithUser, res: Response, next: NextFunctio
   });
 };
 
-export const isUserAuth = (req: RequestWithUser, res: Response) => {
-  verifyJWT(req, res, () => {});
-  res.json({ isLoggedIn: true, username: req.user?.username });
+export const getUserAuthInfo = (req: RequestWithUser, res: Response) => {
+  verifyJWT(req, res, () => {
+    res.json({ isLoggedIn: true, username: req.user?.username });
+  });
 }
